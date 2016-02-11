@@ -2,16 +2,14 @@ package com.dev.frontend.panels.list;
 
 import java.util.List;
 
+import com.dev.frontend.services.Product;
 import com.dev.frontend.services.Services;
 
-
-public class ProductDataModel extends ListDataModel
-{
+public class ProductDataModel extends ListDataModel {
 	private static final long serialVersionUID = 7526529951747614655L;
 
-	public ProductDataModel() 
-	{
-		super(new String[]{"Code","Description","Price","Quantity"}, 0);
+	public ProductDataModel() {
+		super(new String[] { "Code", "Description", "Price", "Quantity" }, 0);
 	}
 
 	@Override
@@ -20,14 +18,16 @@ public class ProductDataModel extends ListDataModel
 	}
 
 	@Override
-	public String[][] convertRecordsListToTableModel(List<Object> list) 
-	{
-		//TODO by the candidate
-		/*
-		 * This method use list returned by Services.listCurrentRecords and should convert it to array of rows
-		 * each row is another array of columns of the row
-		 */
-		String[][] sampleData = new String [][]{{"01","Product 1","12.5","25"},{"02","Product 2","10","8"}};
+	public String[][] convertRecordsListToTableModel(List<Object> list) {
+		Object[] array = list.toArray();
+		String[][] sampleData = new String[array.length][];
+		for (int i = 0; i < array.length; i++) {
+			sampleData[i] = new String[4];
+			sampleData[i][0] = String.valueOf((((Product) array[i]).getCode()));
+			sampleData[i][1] = String.valueOf((((Product) array[i]).getDescription()));
+			sampleData[i][2] = String.valueOf((((Product) array[i]).getPrice()));
+			sampleData[i][3] = String.valueOf((((Product) array[i]).getQuantity()));
+		}
 		return sampleData;
 	}
 }

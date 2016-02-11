@@ -2,6 +2,7 @@ package com.dev.frontend.panels.list;
 
 import java.util.List;
 
+import com.dev.frontend.services.Customer;
 import com.dev.frontend.services.Services;
 
 public class CustomerDataModel extends ListDataModel
@@ -22,12 +23,15 @@ public class CustomerDataModel extends ListDataModel
 	@Override
 	public String[][] convertRecordsListToTableModel(List<Object> list)
 	{
-		//TODO by the candidate
-		/*
-		 * This method use list returned by Services.listCurrentRecords and should convert it to array of rows
-		 * each row is another array of columns of the row
-		 */
-		String[][] sampleData = new String [][]{{"01","Customer 1","+201011121314","23.4"},{"02","Customer 2","+201112131415","1.4"}};
+		Object[] array = list.toArray();
+		String[][] sampleData = new String[array.length][];
+		for (int i = 0; i < array.length; i++) {
+			sampleData[i] = new String[4];
+			sampleData[i][0] = String.valueOf((((Customer) array[i]).getCode()));
+			sampleData[i][1] = String.valueOf((((Customer) array[i]).getName()));
+			sampleData[i][2] = String.valueOf((((Customer) array[i]).getPhone1()));
+			sampleData[i][3] = String.valueOf((((Customer) array[i]).getCurrentLimit()));
+		}
 		return sampleData;
 	}
 }

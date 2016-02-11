@@ -1,7 +1,11 @@
 package com.dev.frontend.panels.list;
 
 import java.util.List;
+import java.util.Set;
 
+import com.dev.frontend.services.LineItems;
+import com.dev.frontend.services.Product;
+import com.dev.frontend.services.SaleOrders;
 import com.dev.frontend.services.Services;
 
 
@@ -22,12 +26,20 @@ public class SalesOrderDataModel extends ListDataModel
 	@Override
 	public String[][] convertRecordsListToTableModel(List<Object> list) 
 	{
-		//TODO by the candidate
-		/*
-		 * This method use list returned by Services.listCurrentRecords and should convert it to array of rows
-		 * each row is another array of columns of the row
-		 */
-		String[][] sampleData = new String [][]{{"22423","(01)Customer 1","122.5"},{"22424","(02)Customer 2","3242.5"}};
+		Object[] array = list.toArray();
+		String[][] sampleData = new String[array.length][];
+		for (int i = 0; i < array.length; i++) {
+			sampleData[i] = new String[3];
+			sampleData[i][0] = String.valueOf((((SaleOrders) array[i]).getOrderNo()));
+			sampleData[i][1] = String.valueOf((((SaleOrders) array[i]).getCustCode()));
+			Set<LineItems> lineItems = ((SaleOrders)array[i]).getLineItems();
+			int totalPrice =0;
+			for(LineItems l : lineItems){
+			 totalPrice =totalPrice + l.getListItemQty()*l.getProduct().getPrice();
+			}
+			sampleData[i][2] = String.valueOf(totalPrice);
+		}
 		return sampleData;
 	}
+	
 }

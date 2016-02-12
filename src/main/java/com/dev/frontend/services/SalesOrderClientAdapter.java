@@ -57,11 +57,12 @@ public class SalesOrderClientAdapter {
 		System.out.println(response.getStatus());
 	}
 
-	public static <T> void delete(String path) {
+	public static <T> Response delete(String path) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		Response response = client.target(SALES_ORDER_APP + path).request()
 				.delete();
 		System.out.println(response.getStatus());
+		return response;
 	}
 
 }

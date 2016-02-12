@@ -12,6 +12,10 @@ public class Services {
 	public static final int TYPE_CUSTOMER = 2;
 	public static final int TYPE_SALESORDER = 3;
 
+	public static final String PATH_PRODUCT = "products";
+	public static final String PATH_CUSTOMER = "customers";
+	public static final String PATH_SALE_ORDER = "salesOrders";
+
 	public static Object save(Object object, int objectType) {
 		// TODO by the candidate
 		/*
@@ -24,15 +28,13 @@ public class Services {
 	}
 
 	public static Object readRecordByCode(String code, int objectType) {
-		// TODO by the candidate
-		/*
-		 * This method is called when you select record in list view of any
-		 * entity and also called after you save a record to re-bind the record
-		 * again the code parameter is the first column of the row you have
-		 * selected and the type is identifier of the object type and may be
-		 * TYPE_PRODUCT , TYPE_CUSTOMER or TYPE_SALESORDER
-		 */
-		return null;
+		if (objectType == TYPE_PRODUCT) {
+			return SalesOrderClientAdapter.get(PATH_PRODUCT.concat("/").concat(code), Product.class);
+		} else if (objectType == TYPE_CUSTOMER) {
+			return SalesOrderClientAdapter.get(PATH_CUSTOMER.concat("/").concat(code), Customer.class);
+		} else {
+			return SalesOrderClientAdapter.get(PATH_SALE_ORDER.concat("/").concat(code), SaleOrders.class);
+		}
 	}
 
 	public static boolean deleteRecordByCode(String code, int objectType) {
@@ -48,11 +50,11 @@ public class Services {
 
 	public static List<Object> listCurrentRecords(int objectType) {
 		if (objectType == TYPE_PRODUCT) {
-			return SalesOrderClientAdapter.getList("products", Product.class);
+			return SalesOrderClientAdapter.getList(PATH_PRODUCT, Product.class);
 		} else if (objectType == TYPE_CUSTOMER) {
-			return SalesOrderClientAdapter.getList("customers", Customer.class);
+			return SalesOrderClientAdapter.getList(PATH_CUSTOMER, Customer.class);
 		} else {
-			return SalesOrderClientAdapter.getList("saleOrders", SaleOrders.class);
+			return SalesOrderClientAdapter.getList(PATH_SALE_ORDER, SaleOrders.class);
 		}
 	}
 

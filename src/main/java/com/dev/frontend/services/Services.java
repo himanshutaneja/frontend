@@ -57,13 +57,22 @@ public class Services {
 	}
 
 	public static List<ComboBoxItem> listCurrentRecordRefernces(int objectType) {
-		// TODO by the candidate
-		/*
-		 * This method is called when a Combo Box need to be initialized and
-		 * should return list of ComboBoxItem which contains code and
-		 * description/name for all records of specified type
-		 */
-		return new ArrayList<ComboBoxItem>();
+		List<ComboBoxItem> dropdownList = new ArrayList<ComboBoxItem>();
+		if (objectType == TYPE_PRODUCT) {
+			List<Object> productList = SalesOrderClientAdapter.getProductList(PATH_PRODUCT);
+			for (Object object : productList) {
+				Product p = (Product) object;
+				dropdownList.add(new ComboBoxItem(p.getCode(), p.getDescription()));
+			}
+			
+		} else if (objectType == TYPE_CUSTOMER) {
+			List<Object> customerList = SalesOrderClientAdapter.getCustomerList(PATH_CUSTOMER);
+			for (Object object : customerList) {
+				Customer p = (Customer) object;
+				dropdownList.add(new ComboBoxItem(p.getCode(), p.getName()));
+			}
+		}
+		return dropdownList;
 	}
 
 	public static double getProductPrice(String productCode) {

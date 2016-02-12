@@ -94,6 +94,7 @@ public class EditProduct extends EditContentPanel
 	public Object guiToObject() 
 	{
 		Product product = new Product();
+		product.setCode(txtCode.getText());
 		product.setDescription(txtDescription.getText());
 		product.setPrice(txtPrice.getText());
 		product.setQuantity(txtQuantity.getText());

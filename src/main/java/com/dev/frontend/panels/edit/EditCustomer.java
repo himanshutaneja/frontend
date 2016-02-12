@@ -148,6 +148,7 @@ public class EditCustomer extends EditContentPanel
 	public Object guiToObject() 
 	{
 		Customer customer = new Customer();
+		customer.setCode(txtCode.getText());
 		customer.setName(txtName.getText());
 		customer.setAddress(txtAddress.getText());
 		customer.setPhone1(txtPhone1.getText());

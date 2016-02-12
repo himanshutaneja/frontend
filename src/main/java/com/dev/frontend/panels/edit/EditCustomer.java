@@ -7,7 +7,9 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.dev.frontend.services.Customer;
 import com.dev.frontend.services.Services;
+import com.dev.frontend.services.Utils;
 
 public class EditCustomer extends EditContentPanel 
 {
@@ -142,12 +144,14 @@ public class EditCustomer extends EditContentPanel
 
 	public Object guiToObject() 
 	{
-		// TODO by the candidate
-		/*
-		 * This method collect values from screen widgets and convert them to object of your type
-		 * This object will be used as a parameter of method Services.save
-		 */
-		return null;
+		Customer customer = new Customer();
+		customer.setName(txtName.getText());
+		customer.setAddress(txtAddress.getText());
+		customer.setPhone1(txtPhone1.getText());
+		customer.setPhone2(txtPhone2.getText());
+		customer.setCreditLimit(Utils.parseInt(txtCreditLimit.getText()));
+		customer.setCurrentLimit(Utils.parseInt(txtCurrentCredit.getText()));
+		return customer;
 	}
 
 	@Override

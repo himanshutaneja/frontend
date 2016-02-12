@@ -3,8 +3,6 @@ package com.dev.frontend.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jboss.resteasy.util.GenericType;
-
 import com.dev.frontend.panels.ComboBoxItem;
 
 public class Services {
@@ -17,14 +15,14 @@ public class Services {
 	public static final String PATH_SALE_ORDER = "salesOrders";
 
 	public static Object save(Object object, int objectType) {
-		// TODO by the candidate
-		/*
-		 * This method is called eventually after you click save on any edit
-		 * screen object parameter is the return object from calling method
-		 * guiToObject on edit screen and the type is identifier of the object
-		 * type and may be TYPE_PRODUCT , TYPE_CUSTOMER or TYPE_SALESORDER
-		 */
-		return null;
+		if (objectType == TYPE_PRODUCT) {
+			SalesOrderClientAdapter.save(PATH_PRODUCT, object);
+		} else if (objectType == TYPE_CUSTOMER) {
+			SalesOrderClientAdapter.save(PATH_CUSTOMER, object);
+		} else {
+			SalesOrderClientAdapter.save(PATH_SALE_ORDER, object);
+		}
+		return object;
 	}
 
 	public static Object readRecordByCode(String code, int objectType) {

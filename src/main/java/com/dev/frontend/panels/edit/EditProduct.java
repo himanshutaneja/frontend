@@ -7,7 +7,9 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.dev.frontend.services.Product;
 import com.dev.frontend.services.Services;
+import com.dev.frontend.services.Utils;
 
 public class EditProduct extends EditContentPanel
 {
@@ -90,12 +92,11 @@ public class EditProduct extends EditContentPanel
 
 	public Object guiToObject() 
 	{
-		// TODO by the candidate
-		/*
-		 * This method collect values from screen widgets and convert them to object of your type
-		 * This object will be used as a parameter of method Services.save
-		 */
-		return null;
+		Product product = new Product();
+		product.setDescription(txtDescription.getText());
+		product.setPrice(Utils.parseInt(txtPrice.getText()));
+		product.setQuantity(Utils.parseInt(txtQuantity.getText()));
+		return product;
 	}
 
 	public int getObjectType()

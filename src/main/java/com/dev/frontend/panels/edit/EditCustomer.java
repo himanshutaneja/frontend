@@ -3,15 +3,12 @@ package com.dev.frontend.panels.edit;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.dev.frontend.services.Customer;
 import com.dev.frontend.services.Services;
-import com.dev.frontend.services.Utils;
 
 public class EditCustomer extends EditContentPanel 
 {
@@ -135,17 +132,16 @@ public class EditCustomer extends EditContentPanel
 
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public boolean bindToGUI(Object o) 
 	{
-		Map map =(LinkedHashMap)o;
-		txtCode.setText(String.valueOf(map.get("code")));
-		txtName.setText(String.valueOf(map.get("name")));
-		txtPhone1.setText(String.valueOf(map.get("phone1")));
-		txtPhone2.setText(String.valueOf(map.get("phone2")));
-		txtAddress.setText(String.valueOf(map.get("code")));
-		txtCreditLimit.setText(String.valueOf(map.get("creditLimit")));
-		txtCurrentCredit.setText(String.valueOf(map.get("currentLimit")));
+		Customer c =(Customer)o;
+		txtCode.setText(c.getCode());
+		txtName.setText(c.getName());
+		txtPhone1.setText(c.getPhone1());
+		txtPhone2.setText(c.getPhone2());
+		txtAddress.setText(c.getAddress());
+		txtCreditLimit.setText(c.getCreditLimit());
+		txtCurrentCredit.setText(c.getCurrentLimit());
 		return true;
 	}
 
@@ -156,8 +152,8 @@ public class EditCustomer extends EditContentPanel
 		customer.setAddress(txtAddress.getText());
 		customer.setPhone1(txtPhone1.getText());
 		customer.setPhone2(txtPhone2.getText());
-		customer.setCreditLimit(Utils.parseInt(txtCreditLimit.getText()));
-		customer.setCurrentLimit(Utils.parseInt(txtCurrentCredit.getText()));
+		customer.setCreditLimit(txtCreditLimit.getText());
+		customer.setCurrentLimit(txtCurrentCredit.getText());
 		return customer;
 	}
 

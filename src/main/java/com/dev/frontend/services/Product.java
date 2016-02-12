@@ -2,16 +2,16 @@ package com.dev.frontend.services;
 
 public class Product {
 
-	private int code;
+	private String code;
 	private String description;
-	private int price;
-	private int quantity;
+	private String price;
+	private String quantity;
 
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
@@ -23,19 +23,19 @@ public class Product {
 		this.description = description;
 	}
 
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 

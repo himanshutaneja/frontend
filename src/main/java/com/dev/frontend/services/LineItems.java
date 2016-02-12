@@ -3,26 +3,26 @@ package com.dev.frontend.services;
 public class LineItems {
 
 
-	private int listItemCode;
-	private int listItemQty;
+	private String listItemCode;
+	private String listItemQty;
 	private String listOrderNo;
 	private String listProductId;
 	private Product product;
 	private SaleOrders saleOrder;
 
-	public int getListItemCode() {
+	public String getListItemCode() {
 		return listItemCode;
 	}
 
-	public void setListItemCode(int listItemCode) {
+	public void setListItemCode(String listItemCode) {
 		this.listItemCode = listItemCode;
 	}
 
-	public int getListItemQty() {
+	public String getListItemQty() {
 		return listItemQty;
 	}
 
-	public void setListItemQty(int listItemQty) {
+	public void setListItemQty(String listItemQty) {
 		this.listItemQty = listItemQty;
 	}
 

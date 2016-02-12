@@ -48,11 +48,11 @@ public class Services {
 
 	public static List<Object> listCurrentRecords(int objectType) {
 		if (objectType == TYPE_PRODUCT) {
-			return SalesOrderClientAdapter.getList(PATH_PRODUCT, Product.class);
+			return SalesOrderClientAdapter.getProductList(PATH_PRODUCT);
 		} else if (objectType == TYPE_CUSTOMER) {
-			return SalesOrderClientAdapter.getList(PATH_CUSTOMER, Customer.class);
+			return SalesOrderClientAdapter.getCustomerList(PATH_CUSTOMER);
 		} else {
-			return SalesOrderClientAdapter.getList(PATH_SALE_ORDER, SaleOrders.class);
+			return SalesOrderClientAdapter.getSaleOrdersList(PATH_SALE_ORDER);
 		}
 	}
 

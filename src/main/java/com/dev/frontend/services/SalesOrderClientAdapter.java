@@ -1,6 +1,7 @@
 package com.dev.frontend.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.client.Entity;
@@ -15,20 +16,38 @@ public class SalesOrderClientAdapter {
 
 	private static final String SALES_ORDER_APP = "http://localhost:8080/SalesOrderApp/";
 
-	public static <T> List<Object> getList(String path, Class<T> clas) {
+	public static <T> List<Object> getCustomerList(String path) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		Response response = client.target(SALES_ORDER_APP + path).request()
-				.get();
-		return response.readEntity(new GenericType<ArrayList<Object>>() {
-		});
+		List<Customer> response = client.target(SALES_ORDER_APP + path).request()
+				.get(new GenericType<ArrayList<Customer>>(){
+				});
+		Object[] array = response.toArray();
+		return Arrays.asList(array);
 	}
 
+	public static <T> List<Object> getProductList(String path) {
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		List<Product> response = client.target(SALES_ORDER_APP + path).request()
+				.get(new GenericType<ArrayList<Product>>(){
+				});
+		Object[] array = response.toArray();
+		return Arrays.asList(array);
+	}
+	
+	public static <T> List<Object> getSaleOrdersList(String path) {
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		List<SaleOrders> response = client.target(SALES_ORDER_APP + path).request()
+				.get(new GenericType<ArrayList<SaleOrders>>(){
+				});
+		Object[] array = response.toArray();
+		return Arrays.asList(array);
+	}
+	
 	public static <T> Object get(String path, Class<T> clas) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		Response response = client.target(SALES_ORDER_APP + path).request()
-				.get();
-		return response.readEntity(new GenericType<Object>() {
-		});
+		T response = client.target(SALES_ORDER_APP + path).request()
+				.get(clas);
+		return response;
 	}
 
 	public static <T> void save(String path, T data) {
@@ -44,26 +63,5 @@ public class SalesOrderClientAdapter {
 				.delete();
 		System.out.println(response.getStatus());
 	}
-	//
-	 public static void main(String[] args) {
-	 String path = "customers";
-//	 List<Object> customers = getList(path,
-//	 new GenericType<ArrayList<Customer>>() {
-//	 });
-//	 System.out.println(customers.get(0).getAddress());
-	
-//		List<Object> list = getList(path, Customer.class);
-	//
-	// Customer customer = get(path + "/1", new GenericType<Customer>() {
-	// });
-	// System.out.println(customer.getAddress());
-	//
-//	 Customer data = new Customer();
-//	 data.setAddress("address11111");
-//	 data.setCode(100);
-	// save(path, data);
-	//
-	// delete(path + "/1");
-	 }
 
 }

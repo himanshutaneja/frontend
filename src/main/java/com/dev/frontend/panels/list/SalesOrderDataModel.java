@@ -1,10 +1,11 @@
 package com.dev.frontend.panels.list;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
+import com.dev.frontend.services.Customer;
+import com.dev.frontend.services.LineItems;
+import com.dev.frontend.services.SaleOrders;
 import com.dev.frontend.services.Services;
 
 public class SalesOrderDataModel extends ListDataModel {
@@ -19,26 +20,24 @@ public class SalesOrderDataModel extends ListDataModel {
 		return Services.TYPE_SALESORDER;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public String[][] convertRecordsListToTableModel(List<Object> list) {
 		Object[] array = list.toArray();
 		String[][] sampleData = new String[array.length][];
 		for (int i = 0; i < array.length; i++) {
 			sampleData[i] = new String[3];
-			Map map = (LinkedHashMap) array[i];
-			sampleData[i][0] = String.valueOf(map.get("orderNo"));
+			SaleOrders so = (SaleOrders) array[i];
+			sampleData[i][0] = so.getOrderNo();
 			sampleData[i][1] = "("
-					+ String.valueOf(map.get("custCode"))
+					+ so.getCustCode()
 					+ ")"
-					+ String.valueOf(((LinkedHashMap) map.get("customer"))
-							.get("name"));
-			List items = (ArrayList) map.get("lineItems");
+					+ ((Customer) so.getCustomer())
+							.getName();
+			Set<LineItems> items = so.getLineItems();
 			int totalPrice = 0;
-			for (Object l : items) {
-				Map lineItem = (LinkedHashMap) l;
-				totalPrice = totalPrice + (Integer)(lineItem.get("listItemQty"))
-						* (Integer)(((LinkedHashMap) lineItem.get("product")).get("price"));
+			for (LineItems l : items) {
+				totalPrice = totalPrice + Integer.parseInt(l.getListItemQty())
+						*  Integer.parseInt(l.getProduct().getPrice());
 			}
 			sampleData[i][2] = String.valueOf(totalPrice);
 		}

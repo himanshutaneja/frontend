@@ -3,15 +3,12 @@ package com.dev.frontend.panels.edit;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.dev.frontend.services.Product;
 import com.dev.frontend.services.Services;
-import com.dev.frontend.services.Utils;
 
 public class EditProduct extends EditContentPanel
 {
@@ -83,14 +80,13 @@ public class EditProduct extends EditContentPanel
 		txtQuantity.setColumns(10);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public boolean bindToGUI(Object o) 
 	{
-		Map map =(LinkedHashMap)o;
-		txtCode.setText(String.valueOf(map.get("code")));
-		txtDescription.setText(String.valueOf(map.get("description")));
-		txtPrice.setText(String.valueOf(map.get("price")));
-		txtQuantity.setText(String.valueOf(map.get("quantity")));
+		Product p =(Product)o;
+		txtCode.setText(p.getCode());
+		txtDescription.setText(p.getDescription());
+		txtPrice.setText(p.getPrice());
+		txtQuantity.setText(p.getQuantity());
 		return true;
 	}
 
@@ -99,8 +95,8 @@ public class EditProduct extends EditContentPanel
 	{
 		Product product = new Product();
 		product.setDescription(txtDescription.getText());
-		product.setPrice(Utils.parseInt(txtPrice.getText()));
-		product.setQuantity(Utils.parseInt(txtQuantity.getText()));
+		product.setPrice(txtPrice.getText());
+		product.setQuantity(txtQuantity.getText());
 		return product;
 	}
 

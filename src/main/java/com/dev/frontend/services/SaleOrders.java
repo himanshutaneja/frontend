@@ -4,21 +4,21 @@ import java.util.Set;
 
 public class SaleOrders {
 
-	private int orderNo;
-	private int custCode;
+	private String orderNo;
+	private String custCode;
 	private Set<LineItems> lineItems;
 	private Customer customer;
 	
-	public int getOrderNo() {
+	public String getOrderNo() {
 		return orderNo;
 	}
-	public void setOrderNo(int orderNo) {
+	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
-	public int getCustCode() {
+	public String getCustCode() {
 		return custCode;
 	}
-	public void setCustCode(int custCode) {
+	public void setCustCode(String custCode) {
 		this.custCode = custCode;
 	}
 	public Set<LineItems> getLineItems() {

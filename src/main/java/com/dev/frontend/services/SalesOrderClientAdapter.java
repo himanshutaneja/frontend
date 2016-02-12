@@ -23,11 +23,11 @@ public class SalesOrderClientAdapter {
 		});
 	}
 
-	public static <T> T get(String path, Class<T> clas) {
+	public static <T> Object get(String path, Class<T> clas) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		Response response = client.target(SALES_ORDER_APP + path).request()
 				.get();
-		return response.readEntity(new GenericType<T>() {
+		return response.readEntity(new GenericType<Object>() {
 		});
 	}
 

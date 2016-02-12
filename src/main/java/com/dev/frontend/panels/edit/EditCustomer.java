@@ -3,6 +3,8 @@ package com.dev.frontend.panels.edit;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -132,14 +134,19 @@ public class EditCustomer extends EditContentPanel
 		txtCurrentCredit.setEditable(false);
 
 	}
-
+	
+	@SuppressWarnings("rawtypes")
 	public boolean bindToGUI(Object o) 
 	{
-		// TODO by the candidate
-		/*
-		 * This method use the object returned by Services.readRecordByCode and should map it to screen widgets 
-		 */
-		return false;
+		Map map =(LinkedHashMap)o;
+		txtCode.setText(String.valueOf(map.get("code")));
+		txtName.setText(String.valueOf(map.get("name")));
+		txtPhone1.setText(String.valueOf(map.get("phone1")));
+		txtPhone2.setText(String.valueOf(map.get("phone2")));
+		txtAddress.setText(String.valueOf(map.get("code")));
+		txtCreditLimit.setText(String.valueOf(map.get("creditLimit")));
+		txtCurrentCredit.setText(String.valueOf(map.get("currentLimit")));
+		return true;
 	}
 
 	public Object guiToObject() 

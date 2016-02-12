@@ -3,6 +3,8 @@ package com.dev.frontend.panels.edit;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -81,14 +83,17 @@ public class EditProduct extends EditContentPanel
 		txtQuantity.setColumns(10);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public boolean bindToGUI(Object o) 
 	{
-		// TODO by the candidate
-		/*
-		 * This method use the object returned by Services.readRecordByCode and should map it to screen widgets 
-		 */
-		return false;
+		Map map =(LinkedHashMap)o;
+		txtCode.setText(String.valueOf(map.get("code")));
+		txtDescription.setText(String.valueOf(map.get("description")));
+		txtPrice.setText(String.valueOf(map.get("price")));
+		txtQuantity.setText(String.valueOf(map.get("quantity")));
+		return true;
 	}
+
 
 	public Object guiToObject() 
 	{

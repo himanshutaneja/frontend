@@ -6,8 +6,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,6 +23,10 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.dev.frontend.panels.ComboBoxItem;
+import com.dev.frontend.services.Customer;
+import com.dev.frontend.services.LineItems;
+import com.dev.frontend.services.Product;
+import com.dev.frontend.services.SaleOrders;
 import com.dev.frontend.services.Services;
 import com.dev.frontend.services.Utils;
 
@@ -213,20 +220,48 @@ public class EditSalesOrder extends EditContentPanel
 	}
 	
 	public boolean bindToGUI(Object o) {
-		// TODO by the candidate
-		/*
-		 * This method use the object returned by Services.readRecordByCode and should map it to screen widgets 
-		 */
-		return false;
+		SaleOrders so =(SaleOrders)o;
+		txtOrderNum.setText(so.getOrderNo());
+		Set<LineItems> lineItems = so.getLineItems();
+		String qty=null;
+		Product p= null;
+		for (LineItems li : lineItems) {
+			qty = li.getListItemQty();
+			p = li.getProduct();
+		}
+		txtProduct.addItem(new ComboBoxItem(p.getCode(), p.getDescription()));
+		txtQuantity.setText(qty);
+		txtCustomer.addItem(new ComboBoxItem(so.getCustomer().getCode(),so.getCustomer().getName()));
+		//txtTotalPrice.setText(String.valueOf(Integer.valueOf(qty)*(Integer.valueOf(p.getPrice()))));
+		return true;
 	}
 
 	public Object guiToObject() {
-		// TODO by the candidate
-		/*
-		 * This method collect values from screen widgets and convert them to object of your type
-		 * This object will be used as a parameter of method Services.save
-		 */
-		return null;
+		SaleOrders so = new SaleOrders();
+		so.setOrderNo(txtOrderNum.getText());
+		so.setCustCode(txtCustomer.getModel().getElementAt(0).getKey());
+		Set<LineItems> s = new HashSet<LineItems>();
+		LineItems li=null;
+		Object[] obj =txtProduct.getSelectedObjects();
+		//ComboBoxItem[] comboBoxItem = (ComboBoxItem[]) txtProduct.getSelectedObjects();
+		for(int i =0; i<obj.length; i++){
+			ComboBoxItem comboBoxItem =(ComboBoxItem)obj[i];
+			li = new LineItems();
+			li.setListItemQty(txtQuantity.getText());
+			li.setListOrderNo(txtOrderNum.getText());
+			li.setListProductId(comboBoxItem.getKey());
+			Product p =new Product();
+			p.setCode(comboBoxItem.getKey());
+			p.setDescription(comboBoxItem.getValue());
+			li.setProduct(p);
+			s.add(li);
+		}
+		so.setLineItems(s);
+		Customer c = new Customer();
+		c.setCode(txtCustomer.getModel().getElementAt(0).getKey());
+		c.setName(txtCustomer.getModel().getElementAt(0).getValue());
+		so.setCustomer(c);
+		return so;
 	}
 
 	public int getObjectType()

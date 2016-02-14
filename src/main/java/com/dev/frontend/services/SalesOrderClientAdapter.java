@@ -19,7 +19,7 @@ public class SalesOrderClientAdapter {
 	public static <T> List<Object> getCustomerList(String path) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		List<Customer> response = client.target(SALES_ORDER_APP + path).request()
-				.get(new GenericType<ArrayList<Customer>>(){
+				.get(new GenericType<ArrayList<Customer>>() {
 				});
 		Object[] array = response.toArray();
 		return Arrays.asList(array);
@@ -28,25 +28,24 @@ public class SalesOrderClientAdapter {
 	public static <T> List<Object> getProductList(String path) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		List<Product> response = client.target(SALES_ORDER_APP + path).request()
-				.get(new GenericType<ArrayList<Product>>(){
+				.get(new GenericType<ArrayList<Product>>() {
 				});
 		Object[] array = response.toArray();
 		return Arrays.asList(array);
 	}
-	
+
 	public static <T> List<Object> getSaleOrdersList(String path) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		List<SaleOrders> response = client.target(SALES_ORDER_APP + path).request()
-				.get(new GenericType<ArrayList<SaleOrders>>(){
+		ArrayList<SaleOrders> response = client.target(SALES_ORDER_APP + path).request()
+				.get(new GenericType<ArrayList<SaleOrders>>() {
 				});
 		Object[] array = response.toArray();
 		return Arrays.asList(array);
 	}
-	
+
 	public static <T> Object get(String path, Class<T> clas) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		T response = client.target(SALES_ORDER_APP + path).request()
-				.get(clas);
+		T response = client.target(SALES_ORDER_APP + path).request().get(clas);
 		return response;
 	}
 
@@ -59,10 +58,36 @@ public class SalesOrderClientAdapter {
 
 	public static <T> Response delete(String path) {
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		Response response = client.target(SALES_ORDER_APP + path).request()
-				.delete();
+		Response response = client.target(SALES_ORDER_APP + path).request().delete();
 		System.out.println(response.getStatus());
 		return response;
 	}
+
+	// @SuppressWarnings("deprecation")
+	// public static <T> List<Object> getSaleOrdersList(String path) {
+	// ClientResponse<SaleOrders[]> response = null;
+	// try {
+	// ClientRequest cr = new ClientRequest(SALES_ORDER_APP + path);
+	// cr.accept("application/json");
+	// response = cr.get(SaleOrders[].class);
+	// ObjectMapper mapper =new ObjectMapper();
+	// mapper.reader().withType(new TypeReference<List<SaleOrders>>() {
+	// }).readValues(response.getEntity().toString(), SaleOrders.class);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// SaleOrders[] soArr = response.getEntity();
+	// //System.out.println(so.length);
+	// SaleOrders so = soArr[0];
+	// Object[] array = { so };
+	// return Arrays.asList(array);
+	// }
+
+	// public static void main(String[] args) {
+	// saleOrdersList = SalesOrderClientAdapter.getSaleOrdersList("saleOrders");
+	// // List<Object> saleOrdersList = sc.getSaleOrdersList("saleOrders");
+	//
+	// System.out.println();
+	// }
 
 }

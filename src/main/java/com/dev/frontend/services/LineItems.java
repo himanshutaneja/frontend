@@ -2,20 +2,14 @@ package com.dev.frontend.services;
 
 public class LineItems {
 
-
-	private String listItemCode;
+	private int listItemCode;
 	private String listItemQty;
 	private String listOrderNo;
 	private String listProductId;
 	private Product product;
-	private SaleOrders saleOrder;
 
-	public String getListItemCode() {
+	public int getListItemCode() {
 		return listItemCode;
-	}
-
-	public void setListItemCode(String listItemCode) {
-		this.listItemCode = listItemCode;
 	}
 
 	public String getListItemQty() {
@@ -50,20 +44,11 @@ public class LineItems {
 		this.product = product;
 	}
 
-	public SaleOrders getSaleOrder() {
-		return saleOrder;
-	}
-
-	public void setSaleOrder(SaleOrders saleOrder) {
-		this.saleOrder = saleOrder;
-	}
-
 	@Override
 	public String toString() {
-		return "LineItems [listItemCode=" + listItemCode + ", listItemQty="
-				+ listItemQty + ", listOrderNo=" + listOrderNo
-				+ ", listProductId=" + listProductId + ", product=" + product
-				+ ", saleOrder=" + saleOrder + "]";
+		return "LineItems [listItemCode=" + listItemCode + ", listItemQty=" + listItemQty + ", listOrderNo="
+				+ listOrderNo + ", listProductId=" + listProductId + ", product=" + product + "]";
 	}
+
 
 }

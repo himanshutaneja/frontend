@@ -66,4 +66,10 @@ public class Customer {
 		this.currentLimit = currentLimit;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [code=" + code + ", name=" + name + ", address=" + address + ", phone1=" + phone1 + ", phone2="
+				+ phone2 + ", creditLimit=" + creditLimit + ", currentLimit=" + currentLimit + "]";
+	}
+
 }

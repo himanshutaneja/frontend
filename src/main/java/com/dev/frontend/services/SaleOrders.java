@@ -2,6 +2,7 @@ package com.dev.frontend.services;
 
 import java.util.Set;
 
+
 public class SaleOrders {
 
 	private String orderNo;
@@ -18,6 +19,9 @@ public class SaleOrders {
 	public String getCustCode() {
 		return custCode;
 	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public void setCustCode(String custCode) {
 		this.custCode = custCode;
 	}
@@ -30,9 +34,7 @@ public class SaleOrders {
 	public Customer getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+	
 	@Override
 	public String toString() {
 		return "SaleOrders [orderNo=" + orderNo + ", custCode=" + custCode + ", lineItems=" + lineItems + ", customer="

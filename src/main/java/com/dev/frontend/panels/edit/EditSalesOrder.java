@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -232,7 +231,7 @@ public class EditSalesOrder extends EditContentPanel
 		txtProduct.addItem(new ComboBoxItem(p.getCode(), p.getDescription()));
 		txtQuantity.setText(qty);
 		txtCustomer.addItem(new ComboBoxItem(so.getCustomer().getCode(),so.getCustomer().getName()));
-		//txtTotalPrice.setText(String.valueOf(Integer.valueOf(qty)*(Integer.valueOf(p.getPrice()))));
+		txtTotalPrice.setText(String.valueOf(Integer.valueOf(qty)*(Integer.valueOf(p.getPrice()))));
 		return true;
 	}
 
@@ -243,7 +242,6 @@ public class EditSalesOrder extends EditContentPanel
 		Set<LineItems> s = new HashSet<LineItems>();
 		LineItems li=null;
 		Object[] obj =txtProduct.getSelectedObjects();
-		//ComboBoxItem[] comboBoxItem = (ComboBoxItem[]) txtProduct.getSelectedObjects();
 		for(int i =0; i<obj.length; i++){
 			ComboBoxItem comboBoxItem =(ComboBoxItem)obj[i];
 			li = new LineItems();

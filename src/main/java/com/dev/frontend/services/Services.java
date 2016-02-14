@@ -12,7 +12,7 @@ public class Services {
 
 	public static final String PATH_PRODUCT = "products";
 	public static final String PATH_CUSTOMER = "customers";
-	public static final String PATH_SALE_ORDER = "salesOrders";
+	public static final String PATH_SALE_ORDER = "saleOrders";
 	public static final int HTTP_SUCCESS = 200;
 
 	public static Object save(Object object, int objectType) {
